@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>10.11.4 Good Time Interval Filtering</TITLE>
+<META NAME="description" CONTENT="10.11.4 Good Time Interval Filtering">
+<META NAME="keywords" CONTENT="cfitsio">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="cfitsio.css">
+
+<LINK REL="next" HREF="node102.html">
+<LINK REL="previous" HREF="node100.html">
+<LINK REL="up" HREF="node97.html">
+<LINK REL="next" HREF="node102.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1561"
+  HREF="node102.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1557"
+  HREF="node97.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1551"
+  HREF="node100.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1559"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1562"
+  HREF="node102.html">10.11.5 Spatial Region Filtering</A>
+<B> Up:</B> <A NAME="tex2html1558"
+  HREF="node97.html">10.11 Row Filtering Specification</A>
+<B> Previous:</B> <A NAME="tex2html1552"
+  HREF="node100.html">10.11.3 Vector Columns</A>
+ &nbsp; <B>  <A NAME="tex2html1560"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0011114000000000000000">
+10.11.4 Good Time Interval Filtering</A>
+</H2>
+
+<P>
+A common filtering method involves selecting rows which have a time
+    value which lies within what is called a Good Time Interval or GTI.
+    The time intervals are defined in a separate FITS table extension
+    which contains 2 columns giving the start and stop time of each
+    good interval.  The filtering operation accepts only those rows of
+    the input table which have an associated time which falls within
+    one of the time intervals defined in the GTI extension. A high
+    level function, gtifilter(a,b,c,d), is available which evaluates
+    each row of the input table  and returns TRUE  or FALSE depending
+    whether the row is inside or outside the  good time interval.  The
+    syntax is
+
+<P>
+<PRE>
+      gtifilter( [ "gtifile" [, expr [, "STARTCOL", "STOPCOL" ] ] ] )
+    or
+      gtifilter( [ 'gtifile' [, expr [, 'STARTCOL', 'STOPCOL' ] ] ] )
+</PRE>
+    where  each "[]" demarks optional parameters.  Note that  the quotes
+    around the gtifile and START/STOP column are required.  Either single
+    or double quotes may be used.  In cases where this expression is
+    entered on the Unix command line, enclose the entire expression in
+    double quotes, and then use single quotes within the expression to
+    enclose the 'gtifile' and other terms.  It is also usually possible
+    to do the reverse, and enclose the whole expression in single quotes
+    and then use double quotes within the expression.  The gtifile,
+    if specified,  can be blank  ("") which will  mean to use  the first
+    extension  with   the name "*GTI*"  in   the current  file,  a plain
+    extension  specifier (eg, "+2",  "[2]", or "[STDGTI]") which will be
+    used  to  select  an extension  in  the current  file, or  a regular
+    filename with or without an extension  specifier which in the latter
+    case  will mean to  use the first  extension  with an extension name
+    "*GTI*".  Expr can be   any arithmetic expression, including  simply
+    the time  column  name.  A  vector  time expression  will  produce a
+    vector boolean  result.  STARTCOL and  STOPCOL are the  names of the
+    START/STOP   columns in the    GTI extension.  If   one  of them  is
+    specified, they both  must be.
+
+<P>
+In  its  simplest form, no parameters need to be provided - default
+    values will be used.  The expression "gtifilter()" is equivalent to
+
+<P>
+<PRE>
+       gtifilter( "", TIME, "*START*", "*STOP*" )
+</PRE>
+    This will search the current file for a GTI  extension,  filter  the
+    TIME  column in the current table, using START/STOP times taken from
+    columns in the GTI  extension  with  names  containing  the  strings
+    "START"  and "STOP".  The wildcards ('*') allow slight variations in
+    naming conventions  such  as  "TSTART"  or  "STARTTIME".   The  same
+    default  values  apply for unspecified parameters when the first one
+    or  two  parameters  are  specified.   The  function   automatically
+    searches   for   TIMEZERO/I/F   keywords  in  the  current  and  GTI
+    extensions, applying a relative time offset, if necessary.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1561"
+  HREF="node102.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1557"
+  HREF="node97.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1551"
+  HREF="node100.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1559"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1562"
+  HREF="node102.html">10.11.5 Spatial Region Filtering</A>
+<B> Up:</B> <A NAME="tex2html1558"
+  HREF="node97.html">10.11 Row Filtering Specification</A>
+<B> Previous:</B> <A NAME="tex2html1552"
+  HREF="node100.html">10.11.3 Vector Columns</A>
+ &nbsp; <B>  <A NAME="tex2html1560"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+ 
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.3 Arrays of Fixed-Length Strings in Binary Tables</TITLE>
+<META NAME="description" CONTENT="12.3 Arrays of Fixed-Length Strings in Binary Tables">
+<META NAME="keywords" CONTENT="cfitsio">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="cfitsio.css">
+
+<LINK REL="next" HREF="node116.html">
+<LINK REL="previous" HREF="node114.html">
+<LINK REL="up" HREF="node112.html">
+<LINK REL="next" HREF="node116.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1735"
+  HREF="node116.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1731"
+  HREF="node112.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1725"
+  HREF="node114.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1733"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1736"
+  HREF="node116.html">12.4 Keyword Units Strings</A>
+<B> Up:</B> <A NAME="tex2html1732"
+  HREF="node112.html">12. Local FITS Conventions</A>
+<B> Previous:</B> <A NAME="tex2html1726"
+  HREF="node114.html">12.2 Long String Keyword</A>
+ &nbsp; <B>  <A NAME="tex2html1734"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001330000000000000000">
+12.3 Arrays of Fixed-Length Strings in Binary Tables</A>
+</H1>
+
+<P>
+CFITSIO supports 2 ways to specify that a character column in a binary
+table contains an array of fixed-length strings.  The first way, which
+is officially supported by the FITS Standard document, uses the TDIMn keyword.
+For example, if TFORMn = '60A' and TDIMn = '(12,5)' then that
+column will be interpreted as containing an array of 5 strings, each 12
+characters long.
+
+<P>
+CFITSIO also supports a
+local convention for the format of the TFORMn keyword value of the form
+'rAw' where 'r' is an integer specifying the total width in characters
+of the column, and 'w' is an integer specifying the (fixed) length of
+an individual unit string within the vector.  For example, TFORM1 =
+'120A10' would indicate that the binary table column is 120 characters
+wide and consists of 12 10-character length strings.  This convention
+is recognized by the CFITSIO routines that read or write strings in
+binary tables.   The Binary Table definition document specifies that
+other optional characters may follow the data type code in the TFORM
+keyword, so this local convention is in compliance with the
+FITS standard although other FITS readers may not
+recognize this convention.
+
+<P>
+The Binary Table definition document that was approved by the IAU in
+1994 contains an appendix describing an alternate convention for
+specifying arrays of fixed or variable length strings in a binary table
+character column (with the form 'rA:SSTRw/nnn)'.  This appendix was not
+officially voted on by the IAU and hence is still provisional.  CFITSIO
+does not currently support this proposal.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1735"
+  HREF="node116.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1731"
+  HREF="node112.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1725"
+  HREF="node114.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1733"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1736"
+  HREF="node116.html">12.4 Keyword Units Strings</A>
+<B> Up:</B> <A NAME="tex2html1732"
+  HREF="node112.html">12. Local FITS Conventions</A>
+<B> Previous:</B> <A NAME="tex2html1726"
+  HREF="node114.html">12.2 Long String Keyword</A>
+ &nbsp; <B>  <A NAME="tex2html1734"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+ 
+</ADDRESS>
+</BODY>
+</HTML>

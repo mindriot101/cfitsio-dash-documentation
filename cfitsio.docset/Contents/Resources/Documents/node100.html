@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>10.11.3 Vector Columns</TITLE>
+<META NAME="description" CONTENT="10.11.3 Vector Columns">
+<META NAME="keywords" CONTENT="cfitsio">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="cfitsio.css">
+
+<LINK REL="next" HREF="node101.html">
+<LINK REL="previous" HREF="node99.html">
+<LINK REL="up" HREF="node97.html">
+<LINK REL="next" HREF="node101.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1549"
+  HREF="node101.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1545"
+  HREF="node97.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1539"
+  HREF="node99.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1547"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1550"
+  HREF="node101.html">10.11.4 Good Time Interval</A>
+<B> Up:</B> <A NAME="tex2html1546"
+  HREF="node97.html">10.11 Row Filtering Specification</A>
+<B> Previous:</B> <A NAME="tex2html1540"
+  HREF="node99.html">10.11.2 Bit Masks</A>
+ &nbsp; <B>  <A NAME="tex2html1548"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION0011113000000000000000">
+10.11.3 Vector Columns</A>
+</H2>
+
+<P>
+Vector columns can also be used  in  building  the  expression.   No
+    special  syntax  is required if one wants to operate on all elements
+    of the vector.  Simply use the column name as for a  scalar  column.
+    Vector  columns  can  be  freely  intermixed  with scalar columns or
+    constants in virtually all expressions.  The result will be  of  the
+    same dimension as the vector.  Two vectors in an expression, though,
+    need to  have  the  same  number  of  elements  and  have  the  same
+    dimensions.
+
+<P>
+Arithmetic and logical operations are all performed on an element by
+    element basis.  Comparing two vector columns,  eg  "COL1  ==  COL2",
+    thus  results  in  another vector of boolean values indicating which
+    elements of the two vectors are equal.
+
+<P>
+Eight functions are available that operate on a vector and return a
+    scalar result:
+
+<P>
+<PRE>
+    "minimum"      MIN(V)          "maximum"               MAX(V)
+    "average"      AVERAGE(V)      "median"                MEDIAN(V)
+    "summation"    SUM(V)          "standard deviation"    STDDEV(V)
+    "# of values"  NELEM(V)        "# of non-null values"  NVALID(V)
+</PRE>
+    where V represents the name of a vector column or a manually
+    constructed vector using curly brackets as described below.  The
+    first 6 of these functions ignore any null values in the vector when
+    computing the result.  The STDDEV() function computes the sample
+    standard deviation, i.e. it is proportional to 1/SQRT(N-1) instead
+    of 1/SQRT(N), where N is NVALID(V).
+
+<P>
+The SUM function literally sums all  the elements in x,  returning a
+    scalar value.   If V  is  a  boolean  vector, SUM returns the number
+    of TRUE elements. The NELEM function  returns the number of elements
+    in vector V whereas NVALID return the number of non-null elements in
+    the  vector.   (NELEM  also  operates  on  bit  and string  columns,
+    returning their column widths.)  As an example, to  test whether all
+    elements of two vectors satisfy a  given logical comparison, one can
+    use the expression
+
+<P>
+<PRE>
+              SUM( COL1 &gt; COL2 ) == NELEM( COL1 )
+</PRE>
+
+<P>
+which will return TRUE if all elements  of  COL1  are  greater  than
+    their corresponding elements in COL2.
+
+<P>
+To  specify  a  single  element  of  a  vector, give the column name
+    followed by  a  comma-separated  list  of  coordinates  enclosed  in
+    square  brackets.  For example, if a vector column named PHAS exists
+    in the table as a one dimensional, 256  component  list  of  numbers
+    from  which  you  wanted to select the 57th component for use in the
+    expression, then PHAS[57] would do the  trick.   Higher  dimensional
+    arrays  of  data  may appear in a column.  But in order to interpret
+    them, the TDIMn keyword must appear in the header.  Assuming that  a
+    (4,4,4,4)  array  is packed into each row of a column named ARRAY4D,
+    the  (1,2,3,4)  component  element  of  each  row  is  accessed   by
+    ARRAY4D[1,2,3,4].    Arrays   up   to   dimension  5  are  currently
+    supported.  Each vector index can itself be an expression,  although
+    it  must  evaluate  to  an  integer  value  within the bounds of the
+    vector.  Vector columns which contain spaces or arithmetic operators
+    must   have   their   names  enclosed  in  "$"  characters  as  with
+    $ARRAY-4D$[1,2,3,4].
+
+<P>
+A  more  C-like  syntax  for  specifying  vector  indices  is   also
+    available.   The element used in the preceding example alternatively
+    could be specified with the syntax  ARRAY4D[4][3][2][1].   Note  the
+    reverse  order  of  indices  (as in C), as well as the fact that the
+    values are still ones-based (as  in  Fortran  -  adopted  to  avoid
+    ambiguity  for  1D vectors).  With this syntax, one does not need to
+    specify all of the indices.  To  extract  a  3D  slice  of  this  4D
+    array, use ARRAY4D[4].
+
+<P>
+Variable-length vector columns are not supported.
+
+<P>
+Vectors can  be manually constructed  within the expression  using a
+    comma-separated list of  elements surrounded by curly braces ('{}').
+    For example, '{1,3,6,1}' is a 4-element vector containing the values
+    1, 3, 6, and 1.  The  vector can contain  only boolean, integer, and
+    real values (or expressions).  The elements will  be promoted to the
+    highest  data type   present.  Any   elements   which  are themselves
+    vectors, will be expanded out with  each of its elements becoming an
+    element in the constructed vector.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1549"
+  HREF="node101.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1545"
+  HREF="node97.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1539"
+  HREF="node99.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1547"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1550"
+  HREF="node101.html">10.11.4 Good Time Interval</A>
+<B> Up:</B> <A NAME="tex2html1546"
+  HREF="node97.html">10.11 Row Filtering Specification</A>
+<B> Previous:</B> <A NAME="tex2html1540"
+  HREF="node99.html">10.11.2 Bit Masks</A>
+ &nbsp; <B>  <A NAME="tex2html1548"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+ 
+</ADDRESS>
+</BODY>
+</HTML>

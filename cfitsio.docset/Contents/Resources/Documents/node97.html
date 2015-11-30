@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>10.11 Row Filtering Specification</TITLE>
+<META NAME="description" CONTENT="10.11 Row Filtering Specification">
+<META NAME="keywords" CONTENT="cfitsio">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="cfitsio.css">
+
+<LINK REL="next" HREF="node104.html">
+<LINK REL="previous" HREF="node96.html">
+<LINK REL="up" HREF="node81.html">
+<LINK REL="next" HREF="node98.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1507"
+  HREF="node98.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1503"
+  HREF="node81.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1497"
+  HREF="node96.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1505"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1508"
+  HREF="node98.html">10.11.1 General Syntax</A>
+<B> Up:</B> <A NAME="tex2html1504"
+  HREF="node81.html">10. Extended File Name</A>
+<B> Previous:</B> <A NAME="tex2html1498"
+  HREF="node96.html">10.10 Column and Keyword</A>
+ &nbsp; <B>  <A NAME="tex2html1506"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION0011110000000000000000">
+10.11 Row Filtering Specification</A>
+</H1>
+
+<P>
+When entering the name of a FITS table that is to be opened by a
+    program, an optional row filter may be specified to select a subset
+    of the rows in the table.  A temporary new FITS file is created on
+    the fly which contains only those rows for which the row filter
+    expression evaluates to true.  The primary array and any other
+    extensions in the input file are also copied to the temporary
+    file.
+(If a `#' character is appended to the name or number of the
+table HDU then only the primary array, and none of the other
+HDUs in the input file will be copied into the temporary file).
+    The original FITS file is closed and the new virtual file
+    is opened by the application program.  The row filter expression is
+    enclosed in square brackets following the file name and extension
+    name (e.g., 'file.fits[events][GRADE==50]'  selects only those rows
+    where the GRADE column value equals 50).   When dealing with tables
+    where each row has an associated time and/or 2D spatial position,
+    the row filter expression can also be used to select rows based on
+    the times in a Good Time Intervals (GTI) extension, or on spatial
+    position as given in a SAO-style region file.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html1509"
+  HREF="node98.html">10.11.1 General Syntax</A>
+<LI><A NAME="tex2html1510"
+  HREF="node99.html">10.11.2 Bit Masks</A>
+<LI><A NAME="tex2html1511"
+  HREF="node100.html">10.11.3 Vector Columns</A>
+<LI><A NAME="tex2html1512"
+  HREF="node101.html">10.11.4 Good Time Interval Filtering</A>
+<LI><A NAME="tex2html1513"
+  HREF="node102.html">10.11.5 Spatial Region Filtering</A>
+<LI><A NAME="tex2html1514"
+  HREF="node103.html">10.11.6 Example Row Filters</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1507"
+  HREF="node98.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1503"
+  HREF="node81.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1497"
+  HREF="node96.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1505"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1508"
+  HREF="node98.html">10.11.1 General Syntax</A>
+<B> Up:</B> <A NAME="tex2html1504"
+  HREF="node81.html">10. Extended File Name</A>
+<B> Previous:</B> <A NAME="tex2html1498"
+  HREF="node96.html">10.10 Column and Keyword</A>
+ &nbsp; <B>  <A NAME="tex2html1506"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+ 
+</ADDRESS>
+</BODY>
+</HTML>

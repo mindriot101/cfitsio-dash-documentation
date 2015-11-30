@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.6 Tile-Compressed Image Format</TITLE>
+<META NAME="description" CONTENT="12.6 Tile-Compressed Image Format">
+<META NAME="keywords" CONTENT="cfitsio">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="cfitsio.css">
+
+<LINK REL="previous" HREF="node117.html">
+<LINK REL="up" HREF="node112.html">
+<LINK REL="next" HREF="node119.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1769"
+  HREF="node119.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1765"
+  HREF="node112.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1761"
+  HREF="node117.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1767"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1770"
+  HREF="node119.html">13. Optimizing Programs</A>
+<B> Up:</B> <A NAME="tex2html1766"
+  HREF="node112.html">12. Local FITS Conventions</A>
+<B> Previous:</B> <A NAME="tex2html1762"
+  HREF="node117.html">12.5 HIERARCH Convention for</A>
+ &nbsp; <B>  <A NAME="tex2html1768"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001360000000000000000">
+12.6 Tile-Compressed Image Format</A>
+</H1>
+
+<P>
+CFITSIO supports a convention for compressing n-dimensional images and
+storing the resulting byte stream in a variable-length column in a FITS
+binary table.  The general principle used in this convention is to
+first divide the n-dimensional image into a rectangular grid of
+subimages or `tiles'.  Each tile is then compressed as a continuous
+block of data, and the resulting compressed byte stream is stored in a
+row of a variable length column in a FITS binary table. By dividing the
+image into tiles it is generally possible to extract and uncompress
+subsections of the image without having to uncompress the whole image.
+The default tiling pattern treats each row of a 2-dimensional image (or
+higher dimensional cube) as a tile, such that each tile contains NAXIS1
+pixels (except the default with the HCOMPRESS algorithm is to
+compress the whole 2D image as a single tile). Any other rectangular
+tiling pattern may also be defined. In
+the case of relatively small images it may be sufficient to compress
+the entire image as a single tile, resulting in an output binary table
+with 1 row.  In the case of 3-dimensional data cubes, it may be
+advantageous to treat each plane of the cube as a separate tile if
+application software typically needs to access the cube on a plane by
+plane basis.
+
+<P>
+See section 5.6 ``Image Compression''
+for more information on using this tile-compressed image format.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1769"
+  HREF="node119.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1765"
+  HREF="node112.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1761"
+  HREF="node117.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1767"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1770"
+  HREF="node119.html">13. Optimizing Programs</A>
+<B> Up:</B> <A NAME="tex2html1766"
+  HREF="node112.html">12. Local FITS Conventions</A>
+<B> Previous:</B> <A NAME="tex2html1762"
+  HREF="node117.html">12.5 HIERARCH Convention for</A>
+ &nbsp; <B>  <A NAME="tex2html1768"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+ 
+</ADDRESS>
+</BODY>
+</HTML>

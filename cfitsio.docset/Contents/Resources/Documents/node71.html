@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>9.3.5 Read Keyword Routines</TITLE>
+<META NAME="description" CONTENT="9.3.5 Read Keyword Routines">
+<META NAME="keywords" CONTENT="cfitsio">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="cfitsio.css">
+
+<LINK REL="next" HREF="node72.html">
+<LINK REL="previous" HREF="node70.html">
+<LINK REL="up" HREF="node66.html">
+<LINK REL="next" HREF="node72.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1171"
+  HREF="node72.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1167"
+  HREF="node66.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1161"
+  HREF="node70.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1169"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1172"
+  HREF="node72.html">9.3.6 Modify Keyword Routines</A>
+<B> Up:</B> <A NAME="tex2html1168"
+  HREF="node66.html">9.3 Specialized Header Keyword</A>
+<B> Previous:</B> <A NAME="tex2html1162"
+  HREF="node70.html">9.3.4 Insert Keyword Routines</A>
+ &nbsp; <B>  <A NAME="tex2html1170"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION001035000000000000000">
+9.3.5 Read Keyword Routines</A>
+</H2>
+
+<P>
+Wild card characters may be used when specifying the name of the
+keyword to be read.
+
+<P>
+<DL>
+<DT><STRONG>1 </STRONG></DT>
+<DD>Read a keyword value (with the appropriate data type) and comment from
+    the CHU.  If a NULL comment pointer is given on input, then the comment
+    string will not be returned.  If the value of the keyword is not defined
+    (i.e., the value field is blank) then an error status = VALUE_UNDEFINED
+    will be returned and the input value will not be changed (except that
+    ffgkys will reset the value to a null string).
+  <A NAME="ffgkyx"></A> <A NAME="ffgkls"></A></DD>
+</DL>
+
+<P>
+<PRE>
+  int fits_read_key_str / ffgkys
+      (fitsfile *fptr, char *keyname, &gt; char *value, char *comment,
+       int *status);
+
+  NOTE: after calling the following routine, programs must explicitly free
+        the memory allocated for 'longstr' after it is no longer needed by
+        calling fits_free_memory.
+
+  int fits_read_key_longstr / ffgkls
+      (fitsfile *fptr, char *keyname, &gt; char **longstr, char *comment,
+             int *status)
+
+  int fits_free_memory / fffree
+      (char *longstr, &gt; int *status);
+
+  int fits_read_key_[log, lng, flt, dbl, cmp, dblcmp] / ffgky[ljedcm]
+      (fitsfile *fptr, char *keyname, &gt; DTYPE *numval, char *comment,
+       int *status)
+
+  int fits_read_key_lnglng / ffgkyjj
+      (fitsfile *fptr, char *keyname, &gt; LONGLONG *numval, char *comment,
+       int *status)
+</PRE>
+
+<P>
+<DL>
+<DT><STRONG>2 </STRONG></DT>
+<DD>Read a sequence of indexed keyword values (e.g., NAXIS1, NAXIS2, ...).
+    The input starting index number (nstart) must be greater than 0.
+    If the value of any of the keywords is not defined (i.e., the value
+    field is blank) then an error status = VALUE_UNDEFINED will be
+    returned and the input value for the undefined keyword(s) will not
+    be changed.  These routines do not support wild card characters in
+    the root name.  If there are no indexed keywords in the header with
+    the input root name then these routines do not return a non-zero
+   status value and instead simply return nfound = 0. <A NAME="ffgknx"></A></DD>
+</DL>
+
+<P>
+<PRE>
+  int fits_read_keys_str / ffgkns
+      (fitsfile *fptr, char *keyname, int nstart, int nkeys,
+       &gt; char **value, int *nfound,  int *status)
+
+  int fits_read_keys_[log, lng, flt, dbl] / ffgkn[ljed]
+      (fitsfile *fptr, char *keyname, int nstart, int nkeys,
+       &gt; DTYPE *numval, int *nfound, int *status)
+</PRE>
+
+<P>
+<DL>
+<DT><STRONG>3 </STRONG></DT>
+<DD>Read the value of a floating point keyword, returning the integer and
+    fractional parts of the value in separate routine arguments.
+    This routine may be used to read any keyword but is especially
+    useful for reading the 'triple precision' keywords written by ffpkyt.
+  <A NAME="ffgkyt"></A></DD>
+</DL>
+
+<P>
+<PRE>
+  int fits_read_key_triple / ffgkyt
+      (fitsfile *fptr, char *keyname, &gt; long *intval, double *frac,
+       char *comment, int *status)
+</PRE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1171"
+  HREF="node72.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1167"
+  HREF="node66.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1161"
+  HREF="node70.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1169"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1172"
+  HREF="node72.html">9.3.6 Modify Keyword Routines</A>
+<B> Up:</B> <A NAME="tex2html1168"
+  HREF="node66.html">9.3 Specialized Header Keyword</A>
+<B> Previous:</B> <A NAME="tex2html1162"
+  HREF="node70.html">9.3.4 Insert Keyword Routines</A>
+ &nbsp; <B>  <A NAME="tex2html1170"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+ 
+</ADDRESS>
+</BODY>
+</HTML>

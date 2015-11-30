@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>11.4 Formal Template Syntax</TITLE>
+<META NAME="description" CONTENT="11.4 Formal Template Syntax">
+<META NAME="keywords" CONTENT="cfitsio">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="cfitsio.css">
+
+<LINK REL="next" HREF="node110.html">
+<LINK REL="previous" HREF="node108.html">
+<LINK REL="up" HREF="node105.html">
+<LINK REL="next" HREF="node110.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1659"
+  HREF="node110.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1655"
+  HREF="node105.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1649"
+  HREF="node108.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1657"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1660"
+  HREF="node110.html">11.5 Errors</A>
+<B> Up:</B> <A NAME="tex2html1656"
+  HREF="node105.html">11. Template Files</A>
+<B> Previous:</B> <A NAME="tex2html1650"
+  HREF="node108.html">11.3 Template Parser Directives</A>
+ &nbsp; <B>  <A NAME="tex2html1658"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001240000000000000000">
+11.4 Formal Template Syntax</A>
+</H1>
+
+<P>
+The template syntax can formally be defined as follows:
+
+<P>
+<PRE>
+    TEMPLATE = BLOCK [ BLOCK ... ]
+
+       BLOCK = { HDU | GROUP }
+
+       GROUP = \GROUP [ BLOCK ... ] \END
+
+         HDU = XTENSION [ LINE ... ] { XTENSION | \GROUP | \END | EOF }
+
+        LINE = [ KEYWORD [ = ] ] [ VALUE ] [ / COMMENT ]
+
+    X ...     - X can be present 1 or more times
+    { X | Y } - X or Y
+    [ X ]     - X is optional
+</PRE>
+
+<P>
+At the topmost level, the template defines 1 or more template blocks. Blocks
+can be either HDU (Header Data Unit) or a GROUP. For each block the parser
+creates 1 (or more for GROUPs) FITS file HDUs.
+
+<P>
+<BR><HR>
+<ADDRESS>
+ 
+</ADDRESS>
+</BODY>
+</HTML>

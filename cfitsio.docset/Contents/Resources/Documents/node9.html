@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>2.1.1 Unix Systems</TITLE>
+<META NAME="description" CONTENT="2.1.1 Unix Systems">
+<META NAME="keywords" CONTENT="cfitsio">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="cfitsio.css">
+
+<LINK REL="next" HREF="node10.html">
+<LINK REL="previous" HREF="node8.html">
+<LINK REL="up" HREF="node8.html">
+<LINK REL="next" HREF="node10.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html373"
+  HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html369"
+  HREF="node8.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html363"
+  HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html371"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html374"
+  HREF="node10.html">2.1.2 VMS</A>
+<B> Up:</B> <A NAME="tex2html370"
+  HREF="node8.html">2.1 Building the Library</A>
+<B> Previous:</B> <A NAME="tex2html364"
+  HREF="node8.html">2.1 Building the Library</A>
+ &nbsp; <B>  <A NAME="tex2html372"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00311000000000000000">
+2.1.1 Unix Systems</A>
+</H2>
+
+<P>
+The CFITSIO library is built on Unix systems by typing:
+
+<P>
+<PRE>
+ &gt;  ./configure [--prefix=/target/installation/path] [--enable-reentrant]
+                [--enable-sse2] [--enable-ssse3]
+ &gt;  make          (or  'make shared')
+ &gt;  make install  (this step is optional)
+</PRE>
+at the operating system prompt.  The configure command customizes the
+Makefile for the particular system, then the `make' command compiles the
+source files and builds the library.  Type `./configure' and not simply
+`configure' to ensure that the configure script in the current directory
+is run and not some other system-wide configure script.  The optional
+'prefix' argument to configure gives the path to the directory where
+the CFITSIO library and include files should be installed via the later
+'make install' command. For example,
+
+<P>
+<PRE>
+   &gt; ./configure --prefix=/usr1/local
+</PRE>
+will cause the 'make install' command to copy the CFITSIO libcfitsio file
+to /usr1/local/lib and the necessary include files to /usr1/local/include
+(assuming of course that the  process has permission to write to these
+directories).
+
+<P>
+The optional -enable-reentrant flag will attempt to configure CFITSIO
+so that it can be used in multi-threaded programs.  See the "Using CFITSIO in Multi-threaded Environments" section, below, for more
+
+<P>
+The optional -enable-sse2 and -enable-ssse3 flags will cause configure to
+attempt to build CFITSIO using faster byte-swapping algorithms.
+See the "Optimizing Programs" chapter of this manual for
+more information about these options.
+
+<P>
+The 'make shared' option builds a shared or dynamic version of the
+CFITSIO library.  When using the shared library the executable code is
+not copied into your program at link time and instead the program
+locates the necessary library code at run time, normally through
+LD_LIBRARY_PATH or some other method. The advantages of using a shared
+library are:
+
+<P>
+<PRE>
+   1.  Less disk space if you build more than 1 program
+   2.  Less memory if more than one copy of a program using the shared
+       library is running at the same time since the system is smart
+       enough to share copies of the shared library at run time.
+   3.  Possibly easier maintenance since a new version of the shared
+       library can be installed without relinking all the software
+       that uses it (as long as the subroutine names and calling
+       sequences remain unchanged).
+   4.  No run-time penalty.
+</PRE>
+The disadvantages are:
+
+<P>
+<PRE>
+   1. More hassle at runtime.  You have to either build the programs
+      specially or have LD_LIBRARY_PATH set right.
+   2. There may be a slight start up penalty, depending on where you are
+      reading the shared library and the program from and if your CPU is
+      either really slow or really heavily loaded.
+</PRE>
+
+<P>
+On Mac OS X platforms the 'make shared' command works like on other
+UNIX platforms, but a .dylib file will be created instead of .so.  If
+installed in a nonstandard location, add its location to the
+DYLD_LIBRARY_PATH environment variable so that the library can be found
+at run time.
+
+<P>
+On HP/UX systems, the environment variable CFLAGS should be set
+to -Ae before running configure to enable "extended ANSI" features.
+
+<P>
+By default, a set of Fortran-callable wrapper routines are
+also built and included in the CFITSIO library.  If these wrapper
+routines are not needed (i.e., the CFITSIO library will not
+be linked to any Fortran applications which call FITSIO subroutines)
+then they may be omitted from the build by typing 'make all-nofitsio'
+instead of simply typing 'make'.  This will reduce the size
+of the CFITSIO library slightly.
+
+<P>
+It may not be possible to statically link programs that use CFITSIO on
+some platforms (namely, on Solaris 2.6) due to the network drivers
+(which provide FTP and HTTP access to FITS files).  It is possible to
+make both a dynamic and a static version of the CFITSIO library, but
+network file access will not be possible using the static version.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html373"
+  HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html369"
+  HREF="node8.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html363"
+  HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html371"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html374"
+  HREF="node10.html">2.1.2 VMS</A>
+<B> Up:</B> <A NAME="tex2html370"
+  HREF="node8.html">2.1 Building the Library</A>
+<B> Previous:</B> <A NAME="tex2html364"
+  HREF="node8.html">2.1 Building the Library</A>
+ &nbsp; <B>  <A NAME="tex2html372"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+ 
+</ADDRESS>
+</BODY>
+</HTML>

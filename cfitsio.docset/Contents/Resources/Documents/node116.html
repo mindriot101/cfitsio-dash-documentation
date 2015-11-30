@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>12.4 Keyword Units Strings</TITLE>
+<META NAME="description" CONTENT="12.4 Keyword Units Strings">
+<META NAME="keywords" CONTENT="cfitsio">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="cfitsio.css">
+
+<LINK REL="next" HREF="node117.html">
+<LINK REL="previous" HREF="node115.html">
+<LINK REL="up" HREF="node112.html">
+<LINK REL="next" HREF="node117.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1747"
+  HREF="node117.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1743"
+  HREF="node112.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1737"
+  HREF="node115.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1745"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1748"
+  HREF="node117.html">12.5 HIERARCH Convention for</A>
+<B> Up:</B> <A NAME="tex2html1744"
+  HREF="node112.html">12. Local FITS Conventions</A>
+<B> Previous:</B> <A NAME="tex2html1738"
+  HREF="node115.html">12.3 Arrays of Fixed-Length</A>
+ &nbsp; <B>  <A NAME="tex2html1746"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001340000000000000000">
+12.4 Keyword Units Strings</A>
+</H1>
+
+<P>
+One limitation of the current FITS Standard is that it does not define
+a specific convention for recording the physical units of a keyword
+value.  The TUNITn keyword can be used to specify the physical units of
+the values in a table column, but there is no analogous convention for
+keyword values.  The comment field of the keyword is often used for
+this purpose, but the units are usually not specified in a well defined
+format that FITS readers can easily recognize and extract.
+
+<P>
+To solve this problem, CFITSIO uses a local convention in which the
+keyword units are enclosed in square brackets as the first token in the
+keyword comment field; more specifically, the opening square bracket
+immediately follows the slash '/' comment field delimiter and a single
+space character.  The following examples illustrate keywords that use
+this convention:
+
+<P>
+<PRE>
+EXPOSURE=               1800.0 / [s] elapsed exposure time
+V_HELIO =                16.23 / [km s**(-1)] heliocentric velocity
+LAMBDA  =                5400. / [angstrom] central wavelength
+FLUX    = 4.9033487787637465E-30 / [J/cm**2/s] average flux
+</PRE>
+
+<P>
+In general, the units named in the IAU(1988) Style Guide are
+recommended, with the main exception that the preferred unit for angle
+is 'deg' for degrees.
+
+<P>
+The fits_read_key_unit and fits_write_key_unit routines in
+CFITSIO read and write, respectively, the keyword unit strings in an
+existing keyword.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1747"
+  HREF="node117.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1743"
+  HREF="node112.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1737"
+  HREF="node115.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1745"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1748"
+  HREF="node117.html">12.5 HIERARCH Convention for</A>
+<B> Up:</B> <A NAME="tex2html1744"
+  HREF="node112.html">12. Local FITS Conventions</A>
+<B> Previous:</B> <A NAME="tex2html1738"
+  HREF="node115.html">12.3 Arrays of Fixed-Length</A>
+ &nbsp; <B>  <A NAME="tex2html1746"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+ 
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>10.2 Filetype</TITLE>
+<META NAME="description" CONTENT="10.2 Filetype">
+<META NAME="keywords" CONTENT="cfitsio">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="cfitsio.css">
+
+<LINK REL="next" HREF="node89.html">
+<LINK REL="previous" HREF="node82.html">
+<LINK REL="up" HREF="node81.html">
+<LINK REL="next" HREF="node84.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1336"
+  HREF="node84.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1332"
+  HREF="node81.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1326"
+  HREF="node82.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1334"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1337"
+  HREF="node84.html">10.2.1 Notes about HTTP</A>
+<B> Up:</B> <A NAME="tex2html1333"
+  HREF="node81.html">10. Extended File Name</A>
+<B> Previous:</B> <A NAME="tex2html1327"
+  HREF="node82.html">10.1 Overview</A>
+ &nbsp; <B>  <A NAME="tex2html1335"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION001120000000000000000">
+10.2 Filetype</A>
+</H1>
+
+<P>
+The type of file determines the medium on which the file is located
+(e.g., disk or network) and, hence, which internal device driver is used by
+CFITSIO to read and/or write the file.  Currently supported types are
+
+<P>
+<PRE>
+        file://  - file on local magnetic disk (default)
+         ftp://  - a readonly file accessed with the anonymous FTP protocol.
+                   It also supports  ftp://username:password@hostname/...
+                   for accessing password-protected ftp sites.
+        http://  - a readonly file accessed with the HTTP protocol.  It
+                   supports username:password just like the ftp driver.
+                   Proxy HTTP servers are supported using the http_proxy
+                   environment variable (see following note).
+      stream://  - special driver to read an input FITS file from the stdin
+                   stream, and/or write an output FITS file to the stdout
+		   stream.  This driver is fragile and has limited
+		   functionality (see the following note).
+      gsiftp://  - access files on a computational grid using the gridftp
+                   protocol in the Globus toolkit (see following note).
+        root://  - uses the CERN root protocol for writing as well as
+                   reading files over the network (see following note).
+       shmem://  - opens or creates a file which persists in the computer's
+                   shared memory (see following note).
+         mem://  - opens a temporary file in core memory.  The file
+                   disappears when the program exits so this is mainly
+                   useful for test purposes when a permanent output file
+                   is not desired.
+</PRE>
+If the filetype is not specified, then type file:// is assumed.
+The double slashes '//' are optional and may be omitted in most cases.
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html1338"
+  HREF="node84.html">10.2.1 Notes about HTTP proxy servers</A>
+<LI><A NAME="tex2html1339"
+  HREF="node85.html">10.2.2 Notes about the stream filetype driver</A>
+<LI><A NAME="tex2html1340"
+  HREF="node86.html">10.2.3 Notes about the gsiftp filetype</A>
+<LI><A NAME="tex2html1341"
+  HREF="node87.html">10.2.4 Notes about the root filetype</A>
+<LI><A NAME="tex2html1342"
+  HREF="node88.html">10.2.5 Notes about the shmem filetype:</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+<ADDRESS>
+ 
+</ADDRESS>
+</BODY>
+</HTML>

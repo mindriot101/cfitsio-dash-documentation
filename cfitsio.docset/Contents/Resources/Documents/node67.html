@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>9.3.1 Header Information Routines</TITLE>
+<META NAME="description" CONTENT="9.3.1 Header Information Routines">
+<META NAME="keywords" CONTENT="cfitsio">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="cfitsio.css">
+
+<LINK REL="next" HREF="node68.html">
+<LINK REL="previous" HREF="node66.html">
+<LINK REL="up" HREF="node66.html">
+<LINK REL="next" HREF="node68.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1123"
+  HREF="node68.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.png"></A> 
+<A NAME="tex2html1119"
+  HREF="node66.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.png"></A> 
+<A NAME="tex2html1113"
+  HREF="node66.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.png"></A> 
+<A NAME="tex2html1121"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.png"></A>  
+ <A HREF="http://heasarc.gsfc.nasa.gov/docs/software/fitsio/fitsio.html">FITSIO Home</A>
+<BR>
+<B> Next:</B> <A NAME="tex2html1124"
+  HREF="node68.html">9.3.2 Read and Write</A>
+<B> Up:</B> <A NAME="tex2html1120"
+  HREF="node66.html">9.3 Specialized Header Keyword</A>
+<B> Previous:</B> <A NAME="tex2html1114"
+  HREF="node66.html">9.3 Specialized Header Keyword</A>
+ &nbsp; <B>  <A NAME="tex2html1122"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION001031000000000000000">
+9.3.1 Header Information Routines</A>
+</H2>
+
+<P>
+<DL>
+<DT><STRONG>1 </STRONG></DT>
+<DD>Reserve space in the CHU for MOREKEYS more header keywords.
+    This routine may be called to allocate space for additional keywords
+    at the time the header is created (prior to writing any data).
+    CFITSIO can dynamically add more space to the header when needed,
+    however it is more efficient to preallocate the required space
+   if the size is known in advance. <A NAME="ffhdef"></A></DD>
+</DL>
+
+<P>
+<PRE>
+  int fits_set_hdrsize / ffhdef
+      (fitsfile *fptr, int morekeys, &gt; int *status)
+</PRE>
+
+<P>
+<DL>
+<DT><STRONG>2 </STRONG></DT>
+<DD>Return the number of keywords in the header (not counting the END
+    keyword) and the current position
+    in the header.  The position is the number of the keyword record that
+    will be read next (or one greater than the position of the last keyword
+    that was read). A value of 1 is returned if the pointer is
+   positioned at the beginning of the header. <A NAME="ffghps"></A></DD>
+</DL>
+
+<P>
+<PRE>
+  int fits_get_hdrpos / ffghps
+      (fitsfile *fptr, &gt; int *keysexist, int *keynum, int *status)
+</PRE>
+
+<P>
+<BR><HR>
+<ADDRESS>
+ 
+</ADDRESS>
+</BODY>
+</HTML>
